@@ -4,11 +4,11 @@ OBJS = $(addprefix ../, $(addsuffix .o, $(basename $(SOURCES))))
 OBJS += $(addsuffix .o, $(EXE))
 
 CXXFLAGS = `pkg-config --cflags sdl2`
-CXXFLAGS += -I .. -s
+CXXFLAGS += -I ..
 
 
 LIBFLAGS += -lgdi32 -lopengl32 -limm32 `pkg-config --libs sdl2`
-
+LIBFLAGS += -s
 %.o:%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
