@@ -1,3 +1,9 @@
+# VSCode
+.vscode
+
+#ImGui
+*.ini
+
 # Prerequisites
 *.d
 
