@@ -8,7 +8,7 @@ CXXFLAGS += -I ..
 
 
 LIBFLAGS += -lgdi32 -lopengl32 -limm32 `pkg-config --libs glfw3`
-LIBFLAGS += -mwindows -s
+LIBFLAGS += -s # -mwindows
 
 %.o:%.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@ $<

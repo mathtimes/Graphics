@@ -88,12 +88,60 @@ int main(int, char**)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
         
-        //WINDOW BEGIN
-        ImGui::Begin("Window Title");
-        
-        ImGui::End();
-        //WINDOW END
+        //================================ WINDOW BEGIN ================================
+        static unsigned long long frame = 0;
+        static bool Main_Frame = true;
+        if(Main_Frame)
+        {   
+            frame ++;
+            ImGui::Text("Main Window Opened %d s",frame/60);
+            ImGui::Begin("Main Window",&Main_Frame);
 
+            //Children Windows Status Varibles
+            static bool Random_Number_Window_Button_Status;
+            static bool Input_Box_Button_status;
+            static char InputBuffer[16+1];
+            static bool Boxes_Window_Button_status;
+            
+
+            if(ImGui::Button("Open Random Number Window"))
+                Random_Number_Window_Button_Status ^= true;
+            if(ImGui::Button("Open Input Box"))
+                Input_Box_Button_status ^= true;
+            if(ImGui::Button("Open Check Box Window"))
+                Boxes_Window_Button_status ^= true;
+
+
+            if(Random_Number_Window_Button_Status)
+            {
+                ImGui::Begin("Random Number Window");
+                ImGui::Text("%d",rand());
+                ImGui::End();
+            }
+            if(Input_Box_Button_status)
+            {
+                ImGui::InputText("Input Some Text:",InputBuffer,16,0,NULL,NULL);
+                ImGui::SameLine();
+                if(ImGui::Button("Save"))
+                    Input_Box_Button_status ^= true;
+            }
+            if(Boxes_Window_Button_status)
+            {
+                static int RadioButtonValue;
+                static bool Check_Box_Value;
+                ImGui::Begin("Boxes");
+                ImGui::RadioButton("Zero",&RadioButtonValue,0);ImGui::SameLine();
+                ImGui::RadioButton("First",&RadioButtonValue,1);ImGui::SameLine();
+                ImGui::RadioButton("Second",&RadioButtonValue,2);ImGui::SameLine();
+                ImGui::RadioButton("Third",&RadioButtonValue,3);
+                ImGui::Checkbox("Check Box",&Check_Box_Value);
+                ImGui::Text("RadioButtonValue = %d\nCheck_Box_Value = %s",RadioButtonValue,Check_Box_Value?"True":"False");
+                ImGui::End();
+            }
+            ImGui::End();
+        }
+        //================================ WINDOW END ================================
+        
         // Rendering
         ImGui::Render();
         int display_w, display_h;
