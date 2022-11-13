@@ -4,8 +4,12 @@
 #ImGui
 *.ini
 
+#Qt
+*.user
+
 # Prerequisites
 *.d
+build-*/
 
 # Object files
 *.o
