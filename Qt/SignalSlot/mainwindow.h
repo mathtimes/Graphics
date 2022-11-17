@@ -1,7 +1,13 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
-#include <QtWidgets>
+#include <QMainWindow>
+#include <QWidget>
+#include <QPushButton>
+#include <QCheckBox>
+#include <QLabel>
+#include <QTime>
+#include <QStatusBar>
+#include <QHBoxLayout>
 
 class MainWindow : public QMainWindow
 {
@@ -12,15 +18,12 @@ private:
     QPushButton *btn;
     QCheckBox *ckbox;
     QLabel *label;
-    void onclick();
+    void pressed();
+    void released();
     void onCheck(int);
+    void timerEvent(QTimerEvent *event);
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
 
-    // QObject interface
-protected:
-    void timerEvent(QTimerEvent *event);
 };
-#endif // MAINWINDOW_H
